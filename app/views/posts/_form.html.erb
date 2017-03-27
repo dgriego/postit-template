@@ -1,0 +1,30 @@
+<%= render 'shared/content_title', title: 'Create a new post' %>
+
+<% if @post.errors.any? %>
+  <%= render 'shared/errors', errors: @post.errors %>
+<% end %>
+
+<div class="well">
+  <%= form_for @post do |f| %>
+    <div class="control-group">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="control-group">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    <div class="control-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 5 %>
+    </div>
+
+    <%= f.collection_check_boxes(:category_ids,
+                                 Category.all,
+                                 :id,
+                                 :name) %>
+
+    <% btn_text = @post.new_record? ? 'Create Post' : 'Update Post' %>
+    <%= f.submit btn_text, class: 'btn btn-success' %>
+  <% end %>
+</div>
