@@ -4,7 +4,9 @@
 
     <h4><%= link_to post.title, post %></h4>
     <p><%= fix_url(post.url) %></p>
-    (<%= link_to 'edit', edit_post_path(post) %>)
+    <% if logged_in? %>
+      (<%= link_to 'edit', edit_post_path(post) %>)
+    <% end %>
     <p><%= post.description %></p>
     <p>
       <span class="quiet">posted by:</span> <%= post.creator.username %>

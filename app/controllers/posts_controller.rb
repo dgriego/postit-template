@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, only: [:new, :edit]
   # 1. setup instance variable for action
   # 2. redirect based on some condition
 
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
 
   def create # POST /posts posts_path
     @post = Post.new(post_params)
-    @post.creator = User.first # TODO: change once we have authentication
+    @post.creator = current_user
     @post.category_ids = post_params[:category_ids]
 
     if @post.save

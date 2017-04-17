@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :require_user, only: [:create, :new]
+
   def new # GET /categories/new
     @category = Category.new
   end

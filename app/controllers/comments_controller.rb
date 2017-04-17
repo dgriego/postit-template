@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_user
+
   def create
     # redirect_to a url
     # always render a template
